@@ -7,9 +7,17 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class HomeController {
+    @Autowired private HelysegRepo helysegRepo;
+    @Autowired private SzallodaRepo szallodaRepo;
+    @Autowired private TavaszRepo tavaszRepo;
+
     @GetMapping({"/", "/home"})
     public String home(Model model) {
         model.addAttribute("contentPage", "wellcome");
@@ -20,6 +28,32 @@ public class HomeController {
         model.addAttribute("contentPage", "about");
         return "layout";
     }
+    @GetMapping("/data")
+    public String data(Model model) {
+        List<List<String>> data = GetCombinedDataFromTables();
+        model.addAttribute("data", data);
+        model.addAttribute("contentPage", "data");
+        return "layout";
+    }
+    List<List<String>> GetCombinedDataFromTables() {
+        List<List<String>> matrix = new ArrayList<>();
+
+        for (Tavasz tavasz : tavaszRepo.findAll()) {
+            List<String> row = new ArrayList<>();
+            row.add(String.valueOf(tavasz.getSorszam()));
+            row.add(tavasz.getSzalloda().getNev());
+            row.add(tavasz.getSzalloda().getHelyseg().getNev());
+            row.add(tavasz.getSzalloda().getHelyseg().getOrszag());
+            row.add(String.valueOf(tavasz.getAr()));
+            row.add(String.valueOf(tavasz.getSzalloda().getTengerpart_tav()));
+            row.add(String.valueOf(tavasz.getSzalloda().getRepter_tav()));
+            row.add(tavasz.getIndulas());
+            row.add(String.valueOf(tavasz.getIdotartam()));
+            matrix.add(row);
+        }
+        return matrix;
+    }
+
     @GetMapping("/user")
     public String user(Model model) {
         model.addAttribute("contentPage", "user");

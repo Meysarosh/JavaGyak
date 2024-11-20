@@ -1,0 +1,34 @@
+
+    <div class="container my-5">
+        <div class="text-center mb-4">
+            <h1 class="display-5 text-primary">Foglalások Listája</h1>
+            <p class="lead text-muted">
+                Tekintse meg ügyfeleink legfrissebb foglalásait. Tengerparti nyaralások, városnéző túrák, és még sok más!
+            </p>
+            <i class="fas fa-plane-departure fa-3x text-primary"></i>
+        </div>
+
+        <div class="table-responsive" >
+            <table class="table table-bordered table-hover">
+                <thead class="bg-primary text-white">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Szálloda</th>
+                    <th scope="col">Város</th>
+                    <th scope="col">Ország</th>
+                    <th scope="col">Ár (HUF)</th>
+                    <th scope="col">Tengerpart Távolság (m)</th>
+                    <th scope="col">Reptér Távolság (km)</th>
+                    <th scope="col">Indulás</th>
+                    <th scope="col">Időtartam (nap)</th>
+                </tr>
+                </thead>
+                <tbody xmlns:th="http://www.thymeleaf.org">
+                <tr th:each="row : ${data}">
+                    <td th:each="cell: ${row}" th:text="${cell}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
