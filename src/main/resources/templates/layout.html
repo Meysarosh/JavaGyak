@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Utazási Iroda</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="d-flex flex-column min-vh-100 bg-light">
+
+<header class="bg-primary text-white py-3">
+  <div class="container d-flex align-items-center justify-content-between">
+
+    <div>
+      <img src="/logo.png" alt="Logo" class="img-fluid" style="height: 40px;">
+    </div>
+
+    <nav th:insert="menu"></nav>
+
+    <div sec:authorize="isAuthenticated()">
+      <small class="text-white">Üdvözöljük <span sec:authentication="principal.username">Felhasználó</span></small>
+    </div>
+
+  </div>
+</header>
+
+<main class="container flex-grow-1 py-4">
+  <div th:replace="${contentPage}"></div>
+</main>
+
+<footer class="bg-dark text-white py-3 mt-auto">
+  <div class="container text-center">
+    <small>&copy; 2024 Utazási Iroda. Minden jog fenntartva.</small>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
