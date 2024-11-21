@@ -32,9 +32,10 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers("/","/home","/about", "/css/**", "/js/**", "/images/**", "/logo.png", "/resources/**").permitAll()
-                                .requestMatchers ("/resources/**",  "/register", "/regisztral_feldolgoz").anonymous()
-                                .requestMatchers("/resources/**", "/data", "/user").authenticated()
+                                .requestMatchers( "/css/**", "/js/**", "/images/**", "/logo.png", "/resources/**").permitAll()
+                                .requestMatchers("/","/home","/about","/contact").permitAll()
+                                .requestMatchers (  "/register", "/regisztral_feldolgoz").anonymous()
+                                .requestMatchers( "/data", "/user").authenticated()
                                 .requestMatchers("/admin/**").hasRole("ADMIN")
                 )
                 .formLogin(
