@@ -4,9 +4,8 @@
     <li class="nav-item"><a class="nav-link text-white" href="/home">Kezdőlap</a></li>
     <li class="nav-item"><a class="nav-link text-white" href="/about">Rólunk</a></li>
     <li class="nav-item"><a class="nav-link text-white" href="/contact">Kapcsolat</a></li>
-    <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/user}">Felhasználó</a></li>
     <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/data}">Adat 3 tabla</a></li>
-    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/admin/home}">Admin</a></li>
+    <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item"><a class="nav-link text-white" th:href="@{/messages}">Üzenetek</a></li>
     <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link text-white" th:href="@{/login}">Bejelentkezés</a></li>
     <li sec:authorize="isAnonymous()" class="nav-item"><a class="nav-link text-white" th:href="@{/register}">Regisztráció</a></li>
     <li sec:authorize="isAuthenticated()" class="nav-item"><a class="nav-link text-white" th:href="@{/logout}">Kijelentkezés</a></li>

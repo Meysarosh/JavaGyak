@@ -1,16 +1,21 @@
 package com.example.utazas;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,9 +79,12 @@ public class HomeController {
         return "layout";
     }
 
-    @GetMapping("/admin/home")
-    public String admin(Model model) {
-        model.addAttribute("contentPage", "admin");
+    @GetMapping("/messages")
+    public String Uzenetek(Model model) {
+        Iterable<Message> messages = messageRepo.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
+
+        model.addAttribute("messages", messages);
+        model.addAttribute("contentPage", "messages");
         return "layout";
     }
 
@@ -105,9 +113,19 @@ public class HomeController {
     }
 
     @PostMapping("/contact")
-    public String submitMessage(@ModelAttribute Message message, Model model, Principal principal) {
+    public String submitMessage(@Valid @ModelAttribute Message message, BindingResult bindingResult, Model model, Principal principal) {
+        if(bindingResult.hasErrors())
+            return "layout";
+
         if (message.getText() == null || message.getText().isBlank()) {
             model.addAttribute("error", "Az üzenet mező nem lehet üres.");
+            model.addAttribute("msg", message);
+            model.addAttribute("contentPage", "contact");
+            return "layout";
+        }
+
+        if (!message.getText().isEmpty() && message.getText().length()<10) {
+            model.addAttribute("error", "Túl rövid az üzenet.");
             model.addAttribute("msg", message);
             model.addAttribute("contentPage", "contact");
             return "layout";

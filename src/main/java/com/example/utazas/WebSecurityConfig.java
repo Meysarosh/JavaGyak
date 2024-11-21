@@ -36,7 +36,7 @@ public class WebSecurityConfig {
                                 .requestMatchers("/","/home","/about","/contact").permitAll()
                                 .requestMatchers (  "/register", "/regisztral_feldolgoz").anonymous()
                                 .requestMatchers( "/data", "/user").authenticated()
-                                .requestMatchers("/admin/**").hasRole("ADMIN")
+                                .requestMatchers("/messages").hasRole("ADMIN")
                 )
                 .formLogin(
                         form -> form

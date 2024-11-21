@@ -3,6 +3,7 @@ package com.example.utazas;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Entity
 @Table(name="messages")
@@ -15,7 +16,7 @@ public class Message {
     @Column(name="user_id")
     private Integer user_id;
     @Column(name = "created_at", updatable = false)
-    private LocalDateTime created_at;
+    private LocalDateTime createdAt;
     @Column(name="email")
     private String email;
     @Column(name="name")
@@ -24,6 +25,11 @@ public class Message {
     @ManyToOne
     @JoinColumn(name="user_id", referencedColumnName = "id", insertable=false, updatable=false)
     private User user;
+
+    public String dateToString() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        return this.createdAt.format(formatter);
+    }
 
     public Integer getId() {
         return id;
@@ -50,11 +56,11 @@ public class Message {
     }
 
     public LocalDateTime getCreated_at() {
-        return created_at;
+        return createdAt;
     }
 
     public void setCreated_at(LocalDateTime created_at) {
-        this.created_at = created_at;
+        this.createdAt = created_at;
     }
 
     public String getEmail() {
