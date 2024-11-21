@@ -33,7 +33,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(
                         auth -> auth
                                 .requestMatchers( "/css/**", "/js/**", "/images/**", "/logo.png", "/resources/**").permitAll()
-                                .requestMatchers("/","/home","/about","/contact").permitAll()
+                                .requestMatchers("/","/home","/about","/contact", "/api/**").permitAll()
                                 .requestMatchers (  "/register", "/regisztral_feldolgoz").anonymous()
                                 .requestMatchers( "/data", "/user").authenticated()
                                 .requestMatchers("/messages").hasRole("ADMIN")
