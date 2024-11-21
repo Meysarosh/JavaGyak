@@ -1,0 +1,34 @@
+
+        <div class="container text-center" >
+            <h2>Csak az Admin láthatja ezt az oldalt</h2>
+            <h1 class="display-5">Üzenetek</h1>
+            <p class="lead">Fedezze fel ügyfeleink véleményeit és kérdéseit!</p>
+            <i class="fas fa-comments fa-3x text-light"></i>
+        </div>
+        <div class="card shadow-sm" xmlns="http://www.w3.org/1999/xhtml"
+             xmlns:th="http://www.thymeleaf.org">
+            <div class="card-header bg-primary text-white">
+                <h4>Beérkezett Üzenetek</h4>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped table-bordered">
+                        <thead class="table-primary">
+                        <tr>
+                            <th scope="col">Név</th>
+                            <th scope="col">Üzenet</th>
+                            <th scope="col">Dátum</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="message : ${messages}">
+                            <td th:text="${message.user_id != null ? message.name : 'Vendég'}"></td>
+                            <td th:text="${message.text}"></td>
+                            <td th:text="${message.dateToString()}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
