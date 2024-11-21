@@ -14,11 +14,7 @@ public class Helyseg {
     @Column(name="orszag")
     private String orszag;
 
-//    @OneToMany
-//    @JoinColumn(name="helyseg_az", insertable=false, updatable=false)
-//    private List<Szalloda> szalloda;
-
-    @OneToMany(mappedBy = "helyseg") // Mapped by Szalloda
+    @OneToMany(mappedBy = "helyseg")
     private List<Szalloda> szalloda;
 
     public int getAz() {

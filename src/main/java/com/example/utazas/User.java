@@ -2,6 +2,8 @@ package com.example.utazas;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="users")
 public class User {
@@ -12,6 +14,17 @@ public class User {
     private String email;
     private String password;
     private String role;
+
+    @OneToMany(mappedBy = "id")
+    private List<Message> messages;
+
+    public List<Message> getMessages() {
+        return messages;
+    }
+
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
+    }
 
     public Integer getId() {
         return id;

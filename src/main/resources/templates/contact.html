@@ -1,0 +1,61 @@
+
+<div class="container my-5">
+    <div class="text-center mb-4">
+        <h1 class="display-5 text-primary">Lépjen Kapcsolatba Velünk</h1>
+        <p class="lead text-muted">
+            Van kérdése, észrevétele, vagy szeretné megosztani gondolatait? Írjon nekünk, és örömmel válaszolunk!
+        </p>
+        <i class="fas fa-envelope fa-3x text-primary"></i>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white">
+                    <h4>Küldjön Üzenetet</h4>
+                </div>
+
+                <div th:if="${error}" class="alert alert-danger">
+                    <p th:text="${error}"></p>
+                </div>
+
+                <div th:if="${success}" class="alert alert-success">
+                    <p th:text="${success}"></p>
+                </div>
+
+                <div class="card-body">
+                    <form th:action="@{/contact}" th:object="${msg}" method="post">
+
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Név (opcionális)</label>
+                            <input th:field="*{name}" type="text" id="name" class="form-control" placeholder="Adja meg nevét (ha szeretné)">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email Cím</label>
+                            <input th:field="*{email}" type="email" id="email" class="form-control" placeholder="Adja meg email címét" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Üzenet</label>
+                            <textarea  th:field="*{text}" id="message" name="message" class="form-control" rows="5" placeholder="Írja meg üzenetét" required></textarea>
+                        </div>
+
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Üzenet Küldése</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="text-center mt-5">
+        <p class="text-muted">
+            Mindig örömmel hallunk felhasználóinkról. Az Ön visszajelzése segít nekünk a szolgáltatásaink fejlesztésében!
+        </p>
+    </div>
+</div>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">

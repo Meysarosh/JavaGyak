@@ -22,19 +22,11 @@ public class Szalloda {
     @Column(name="felpanzio")
     private boolean felpanzio;
 
-//    @OneToMany
-//    @JoinColumn(name="szalloda_az", insertable=false, updatable=false)
-//    private List<Tavasz> tavasz;
-//
-//    @ManyToOne
-//    @JoinColumn(name="az", insertable=false, updatable=false)
-//    private Helyseg helyseg;
-
-    @OneToMany(mappedBy = "szalloda", cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Mapped by Tavasz
+    @OneToMany(mappedBy = "szalloda", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<Tavasz> tavasz;
 
     @ManyToOne
-    @JoinColumn(name = "helyseg_az", referencedColumnName = "az", insertable=false, updatable=false) // Proper FK mapping
+    @JoinColumn(name = "helyseg_az", referencedColumnName = "az", insertable=false, updatable=false)
     private Helyseg helyseg;
 
     public String getAz() {
