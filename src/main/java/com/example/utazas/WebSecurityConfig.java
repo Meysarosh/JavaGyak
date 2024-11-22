@@ -29,7 +29,7 @@ public class WebSecurityConfig {
         http.csrf(csrf -> csrf.disable())
                 .authorizeHttpRequests(
                         auth -> auth
-                                .requestMatchers( "/css/**", "/js/**", "/images/**", "/logo.png", "/resources/**").permitAll()
+                                .requestMatchers( "/error","/css/**", "/js/**", "/images/**", "/logo.png", "/resources/**").permitAll()
                                 .requestMatchers("/","/home","/about","/contact", "/api/**").permitAll()
                                 .requestMatchers (  "/register", "/regisztral_feldolgoz").anonymous()
                                 .requestMatchers( "/data", "/user").authenticated()

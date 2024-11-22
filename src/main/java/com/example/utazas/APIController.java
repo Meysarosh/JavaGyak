@@ -22,11 +22,17 @@ public class APIController {
 
    @PostMapping("api/users")
     User addUser(@RequestBody User user) {
+       if(user.getEmail()==null || user.getName()==null || user.getPassword()==null)
+           throw new UserInsufficientDataException();
+       if(userRepository.findByEmail(user.getEmail()).isPresent())
+           throw new UserAlreadyExistsException(user.getEmail());
        return userRepository.save(user);
    }
 
    @PutMapping("/api/users/{id}")
     User updateUser(@PathVariable int id, @RequestBody User newUser) {
+       if(newUser.getEmail()==null || newUser.getName()==null || newUser.getPassword()==null)
+           throw new UserInsufficientDataException();
        return userRepository.findById(id)
                .map(u->{
                    u.setName(newUser.getName());
@@ -42,6 +48,8 @@ public class APIController {
 
    @DeleteMapping("/api/users/{id}")
     void deleteUser(@PathVariable int id) {
+       User user = userRepository.findById(id)
+               .orElseThrow(() -> new UserNotFoundException(id));
        userRepository.deleteById(id);
    }
 
